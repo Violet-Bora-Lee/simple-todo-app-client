@@ -19,6 +19,11 @@ const TodoForm = () => {
 		[e.target.name]: e.target.value
 	})
 
+	const onCheck = e => setTodo({
+		...todo,
+		done: !todo.done
+	})
+
 	const onSubmit = e => {
 		e.preventDefault();
 		todoContext.addTodo(todo);
@@ -55,7 +60,7 @@ const TodoForm = () => {
 
 				<div>
 					<span className="label">완료 여부</span>
-					<input type="checkbox" name="done" value={done} checked={done} onChange={onChange}/>
+					<input type="checkbox" name="done" value={done} checked={done} onChange={onCheck}/>
 				</div>
 
 				<div>
