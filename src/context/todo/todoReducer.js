@@ -15,10 +15,25 @@ export default (state, action) => {
 				...state,
 				todos: [action.payload, ...state.todos]
 			}
+		case UPDATE_TODO:
+			return {
+				...state,
+				todos: state.todos.map(todo => todo.id === action.payload.id ? action.payload: todo)
+			}
 		case DELETE_TODO:
 			return {
 				...state,
 				todos: state.todos.filter(todo => todo.id !== action.payload)
+			}
+		case SET_CURRENT:
+			return {
+				...state,
+				current: action.payload
+			}
+		case CLEAR_CURRENT:
+			return {
+				...state,
+				current: null
 			}
 		default:
 			return state;

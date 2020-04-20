@@ -1,8 +1,25 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import TodoContext from '../../context/todo/todoContext';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const TodoForm = () => {
 	const todoContext = useContext(TodoContext);
+
+	const { addTodo, updateTodo, clearCurrent, current } = todoContext;
+
+	useEffect(() => {
+		if(current !== null) {
+			setTodo(current);
+		} else {
+			setTodo({
+				title: '',
+				description: '',
+				deadline: '',
+				priority: '',
+				done: false
+			})
+		}
+	}, [todoContext, current])
 
 	const [todo, setTodo] = useState({
 		title: '',
@@ -14,6 +31,7 @@ const TodoForm = () => {
 
 	const { title, description, deadline, priority, done } = todo;
 
+	// todo title너무 길 경우 경고
 	const onChange = e => setTodo({
 		...todo,
 		[e.target.name]: e.target.value
@@ -26,25 +44,35 @@ const TodoForm = () => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		todoContext.addTodo(todo);
 
-		setTodo({
-			title: '',
-			description: '',
-			deadline: '',
-			priority: '',
-			done: false
-		})
+		if(current === null) {
+			addTodo(todo);
+		} else {
+			updateTodo(todo);
+		}
+		clearAll();
+	}
+
+	const clearAll = () => {
+		clearCurrent();
 	}
 
 	return (
 		<div>
 			<form onSubmit={onSubmit}>
 
-				<h2 className="text-primary">할 일 추가</h2>
+				<h2 className="text-primary">{current ? '할 일 수정' : '할 일 추가'}</h2>
 
 				<input type="text" placeholder="제목" name="title" value={title} onChange={onChange}/>
-				<input type="text" placeholder="상세 내용" name="description" value={description} onChange={onChange}/>
+
+				<TextareaAutosize
+					className="description-form"
+					useCacheForDOMMeasurements
+					placeholder="상세 내용"
+					name="description"
+					value={description}
+					onChange={onChange}
+				/>
 
 				<div>
 					<span className="label">마감 기한</span>
@@ -61,11 +89,15 @@ const TodoForm = () => {
 				<div>
 					<span className="label">완료 여부</span>
 					<input type="checkbox" name="done" value={done} checked={done} onChange={onCheck}/>
-				</div>
+			</div>
 
 				<div>
-					<input type="submit" value="추가하기" className="btn btn-primary btn-block"/>
+					<input type="submit" value={current ? '수정하기' : '추가하기'} className="btn btn-primary btn-block"/>
 				</div>
+
+				{current && <div>
+					<button className="btn btn-light btn-block" onClick={clearAll}>초기화</button>
+				</div>}
 			</form>
 		</div>
 	);

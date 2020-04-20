@@ -309,7 +309,7 @@ img {
 }
 
 /* Forms */
-input {
+input, textarea {
 	margin: 1.2rem 0;
 }
 
@@ -330,6 +330,10 @@ textarea {
 	padding: 0.4rem;
 	font-size: 1.2rem;
 	border: 1px solid #ccc;
+}
+
+.description-form {
+	resize: vertical;
 }
 
 input[type='datetime-local'] {

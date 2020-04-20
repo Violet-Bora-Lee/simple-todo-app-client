@@ -4,12 +4,13 @@ import TodoContext from '../../context/todo/todoContext';
 
 const TodoItem = ({ todo }) => {
 	const todoContext = useContext(TodoContext);
-	const { deleteTodo } = todoContext;
+	const { deleteTodo, setCurrent, clearCurrent } = todoContext;
 
 	const { id, title, description, deadline, priority, done } = todo;
 
 	const onDelete = () => {
 		deleteTodo(id);
+		clearCurrent();
 	}
 
 	const getPriorityBadgeClass = (priority) => {
@@ -58,7 +59,7 @@ const TodoItem = ({ todo }) => {
 				{description}
 			</span>
 			<p>
-				<button className='btn btn-dark btn-sm'>수정</button>
+				<button className='btn btn-dark btn-sm' onClick={() => setCurrent(todo)}>수정</button>
 				<button className='btn btn-danger btn-sm' onClick={onDelete}>삭제</button>
 				<button
 					style={{float: 'right'}}
