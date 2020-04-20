@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
+import { v4 as uuidv4 } from 'uuid';
 import {
 	ADD_TODO,
 	DELETE_TODO,
@@ -54,8 +55,7 @@ const TodoState = props => {
 
 	// 할 일 추가
 	const addTodo = todo => {
-		// Todo: id 재설정
-		todo.id = Math.floor(Math.random());
+		todo.id = uuidv4();
 		dispatch({
 			type: ADD_TODO,
 			payload: todo,
