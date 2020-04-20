@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
+import TodoContext from '../../context/todo/todoContext';
 
 const TodoItem = ({ todo }) => {
+	const todoContext = useContext(TodoContext);
+	const { deleteTodo } = todoContext;
+
 	const { id, title, description, deadline, priority, done } = todo;
+
+	const onDelete = () => {
+		deleteTodo(id);
+	}
 
 	const getPriorityBadgeClass = (priority) => {
 		let badge = '';
@@ -51,7 +59,7 @@ const TodoItem = ({ todo }) => {
 			</span>
 			<p>
 				<button className='btn btn-dark btn-sm'>수정</button>
-				<button className='btn btn-danger btn-sm'>삭제</button>
+				<button className='btn btn-danger btn-sm' onClick={onDelete}>삭제</button>
 				<button
 					style={{float: 'right'}}
 					className={'deadline badge-white ' + (isOverDeadline() && 'deadline-over')}>

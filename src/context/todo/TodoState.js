@@ -62,6 +62,12 @@ const TodoState = props => {
 	}
 
 	// 할 일 삭제
+	const deleteTodo = id => {
+		dispatch({
+			type: DELETE_TODO,
+			payload: id
+		})
+	}
 
 	// 할 일 선택
 
@@ -78,6 +84,7 @@ const TodoState = props => {
 		  value={{
 		  	todos: state.todos,
 				addTodo,
+				deleteTodo,
 			}}
 		>
 			{ props.children }
