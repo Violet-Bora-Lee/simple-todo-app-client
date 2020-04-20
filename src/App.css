@@ -186,7 +186,7 @@ img {
 /*description*/
 .description {
 	display: block;
-	margin: 0.5rem 1rem;
+	margin: 0.5rem 1rem 1rem 0.5rem;
 }
 
 .deadline {
@@ -330,6 +330,18 @@ textarea {
 	padding: 0.4rem;
 	font-size: 1.2rem;
 	border: 1px solid #ccc;
+}
+
+input[type='datetime-local'] {
+	width: auto;
+	padding: 0.4rem;
+	font-size: 1.2rem;
+	border: 1px solid #ccc;
+}
+
+.label {
+	font-size: 1rem;
+	margin-right: 0.6rem;
 }
 
 input[type='submit'],

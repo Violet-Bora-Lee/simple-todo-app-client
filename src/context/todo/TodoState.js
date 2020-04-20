@@ -52,6 +52,14 @@ const TodoState = props => {
 	const [state, dispatch] = useReducer(todoReducer, initialState);
 
 	// 할 일 추가
+	const addTodo = todo => {
+		// Todo: id 재설정
+		todo.id = Math.floor(Math.random());
+		dispatch({
+			type: ADD_TODO,
+			payload: todo,
+		})
+	}
 
 	// 할 일 삭제
 
@@ -69,6 +77,7 @@ const TodoState = props => {
 		<TodoContext.Provider
 		  value={{
 		  	todos: state.todos,
+				addTodo,
 			}}
 		>
 			{ props.children }

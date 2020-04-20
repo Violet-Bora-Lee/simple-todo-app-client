@@ -1,11 +1,12 @@
 import React from 'react';
 import Todos from '../todos/Todos';
+import TodoForm from '../todos/TodoForm';
 
 const Home = () => {
 	return (
 		<div className='grid-2'>
 			<div>
-				{/*Todo Edit Form*/}
+				<TodoForm/>
 			</div>
 			<div>
 				<Todos/>
