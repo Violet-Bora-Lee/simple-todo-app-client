@@ -1,11 +1,13 @@
 import React from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from "./components/layout/Navbar";
 import './App.css';
 
 const App = () => {
 	return (
-		<div className="App">
-		To-do App
-	</div>
+		<Router>
+				<Navbar/>
+		</Router>
 );
 }
 
