@@ -16,8 +16,8 @@ const TodoState = props => {
 		todos: [
 			{
 				id: 1,
-				title: '주방 청소 1',
-				description: '설거지',
+				title: '주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 ',
+				description: '설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 ',
 				deadline: '2020-05-01',
 				priority: '1',
 				done: false
@@ -25,7 +25,7 @@ const TodoState = props => {
 			{
 				id: 2,
 				title: '주방 청소 2',
-				description: '냉장고 청소',
+				description: '냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 ',
 				deadline: '2020-05-01',
 				priority: '3',
 				done: false
