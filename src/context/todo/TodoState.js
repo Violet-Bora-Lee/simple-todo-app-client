@@ -1,57 +1,45 @@
 import React, { useReducer } from "react";
+import axios from 'axios';
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
 import { v4 as uuidv4 } from 'uuid';
 import {
+	GET_TODOS,
 	ADD_TODO,
 	DELETE_TODO,
 	SET_CURRENT,
 	CLEAR_CURRENT,
 	UPDATE_TODO,
 	FILTER_TODOS,
-	CLEAR_FILTER
+	CLEAR_FILTER,
+	TODO_ERROR
 } from "../types";
 
 const TodoState = props => {
 	const initialState = {
-		todos: [
-			{
-				id: 1,
-				title: '주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 주방 청소 1 ',
-				description: '설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 설거지 ',
-				deadline: '2020-05-01T00:00',
-				priority: '1',
-				done: false
-			},
-			{
-				id: 2,
-				title: '주방 청소 2',
-				description: '냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 냉장고 청소 ',
-				deadline: '2020-05-01T12:00',
-				priority: '3',
-				done: false
-			},
-			{
-				id: 3,
-				title: '거실 청소 1',
-				description: '가구 위 먼지 닦기',
-				deadline: '2020-04-25T01:00',
-				priority: '2',
-				done: false
-			},
-			{
-				id: 4,
-				title: '거실 청소 2',
-				description: '바닥 청소기, 물걸레 질',
-				deadline: '2020-04-26T13:00',
-				priority: '1',
-				done: false
-			},
-		],
-		current: null
+		todos: null,
+		current: null,
+		error: null
 	}
 
 	const [state, dispatch] = useReducer(todoReducer, initialState);
+
+	// 할 일 목록 얻기
+	const getTodos = async () => {
+		try {
+		  const res = await axios.get('/api/todos');
+
+		  dispatch({
+				type: GET_TODOS,
+				payload: res.data,
+			});
+		} catch (err) {
+		  dispatch({
+				type: TODO_ERROR,
+				payload: err.response.message,
+			})
+		}
+	}
 
 	// 할 일 추가
 	const addTodo = todo => {
@@ -102,6 +90,7 @@ const TodoState = props => {
 		  value={{
 		  	todos: state.todos,
 				current: state.current,
+				getTodos,
 				addTodo,
 				deleteTodo,
 				setCurrent,
