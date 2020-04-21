@@ -6,7 +6,8 @@ import {
 	CLEAR_CURRENT,
 	UPDATE_TODO,
 	FILTER_TODOS,
-	CLEAR_FILTER
+	CLEAR_FILTER,
+	TODO_ERROR
 } from "../types";
 
 export default (state, action) => {
@@ -44,6 +45,11 @@ export default (state, action) => {
 			return {
 				...state,
 				current: null
+			}
+		case TODO_ERROR:
+			return {
+				...state,
+				error: action.payload
 			}
 		default:
 			return state;

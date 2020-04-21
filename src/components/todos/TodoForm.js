@@ -1,11 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
+import AlertContext from '../../context/alert/alertContext';
 import TodoContext from '../../context/todo/todoContext';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const TodoForm = () => {
 	const todoContext = useContext(TodoContext);
+	const alertContext = useContext(AlertContext);
 
 	const { addTodo, updateTodo, clearCurrent, current } = todoContext;
+	const { setAlert } = alertContext;
 
 	useEffect(() => {
 		if(current !== null) {
@@ -15,7 +18,7 @@ const TodoForm = () => {
 				title: '',
 				description: '',
 				deadline: '',
-				priority: '',
+				priority: '1',
 				done: false
 			})
 		}
@@ -31,7 +34,6 @@ const TodoForm = () => {
 
 	const { title, description, deadline, priority, done } = todo;
 
-	// todo title너무 길 경우 경고
 	const onChange = e => setTodo({
 		...todo,
 		[e.target.name]: e.target.value
@@ -45,12 +47,19 @@ const TodoForm = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		if(current === null) {
-			addTodo(todo);
+		// todo date 예외처리
+		if(title === '') {
+			setAlert('제목은 필수값 입니다.', 'danger')
+		} else if(title.length > 20) {
+			setAlert("제목이 너무 깁니다. 자세한 내용은 '상세 내용' 항목에 입력해 주세요.", 'danger');
 		} else {
-			updateTodo(todo);
+			if(current === null) {
+				addTodo(todo);
+			} else {
+				updateTodo(todo);
+			}
+			clearAll();
 		}
-		clearAll();
 	}
 
 	const clearAll = () => {
@@ -63,7 +72,7 @@ const TodoForm = () => {
 
 				<h2 className="text-primary">{current ? '할 일 수정' : '할 일 추가'}</h2>
 
-				<input type="text" placeholder="제목" name="title" value={title} onChange={onChange}/>
+				<input type="text" placeholder="제목(20자 이내)" name="title" value={title} onChange={onChange}/>
 
 				<TextareaAutosize
 					className="description-form"

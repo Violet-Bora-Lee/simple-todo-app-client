@@ -2,7 +2,6 @@ import React, { useReducer } from "react";
 import axios from 'axios';
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
-import { v4 as uuidv4 } from 'uuid';
 import {
 	GET_TODOS,
 	ADD_TODO,
@@ -10,6 +9,7 @@ import {
 	SET_CURRENT,
 	CLEAR_CURRENT,
 	UPDATE_TODO,
+	CLEAR_TODOS,
 	FILTER_TODOS,
 	CLEAR_FILTER,
 	TODO_ERROR
@@ -42,12 +42,26 @@ const TodoState = props => {
 	}
 
 	// 할 일 추가
-	const addTodo = todo => {
-		todo.id = uuidv4();
-		dispatch({
-			type: ADD_TODO,
-			payload: todo,
-		})
+	const addTodo = async todo => {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+
+		try {
+			const res = await axios.post('/api/todos', todo, config);
+
+			dispatch({
+				type: ADD_TODO,
+				payload: res.data,
+			});
+		} catch (err) {
+			dispatch({
+				type: TODO_ERROR,
+				payload: err.response.msg,
+			})
+		}
 	}
 
 	// 할 일 삭제
@@ -55,6 +69,12 @@ const TodoState = props => {
 		dispatch({
 			type: DELETE_TODO,
 			payload: id
+		})
+	}
+
+	const clearTodos = () => {
+		dispatch({
+			type: CLEAR_TODOS
 		})
 	}
 
@@ -90,9 +110,11 @@ const TodoState = props => {
 		  value={{
 		  	todos: state.todos,
 				current: state.current,
+				error: state.error,
 				getTodos,
 				addTodo,
 				deleteTodo,
+				clearTodos,
 				setCurrent,
 				clearCurrent,
 				updateTodo
