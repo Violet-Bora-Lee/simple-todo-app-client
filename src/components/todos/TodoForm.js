@@ -85,7 +85,7 @@ const TodoForm = () => {
 
 				<div>
 					<span className="label">마감 기한</span>
-					<input type="datetime-local" placeholder="마감기한" name="deadline" value={deadline} onChange={onChange}/>
+					<input type="date" name="deadline" value={deadline} onChange={onChange}/>
 				</div>
 
 				<div>

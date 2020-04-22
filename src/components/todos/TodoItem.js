@@ -64,7 +64,7 @@ const TodoItem = ({ todo }) => {
 				<button
 					style={{float: 'right'}}
 					className={'deadline badge-white ' + (isOverDeadline() && 'deadline-over')}>
-				마감기한: {deadline}</button>
+				마감기한: {deadline ? deadline : '없음'}</button>
 			</p>
 
 
