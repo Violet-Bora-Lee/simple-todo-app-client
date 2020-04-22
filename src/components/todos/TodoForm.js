@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import TodoContext from '../../context/todo/todoContext';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -9,6 +9,8 @@ const TodoForm = () => {
 
 	const { addTodo, updateTodo, clearCurrent, current } = todoContext;
 	const { setAlert } = alertContext;
+
+	const titleEl = useRef(null);
 
 	useEffect(() => {
 		if(current !== null) {
@@ -22,6 +24,7 @@ const TodoForm = () => {
 				done: false
 			})
 		}
+		titleEl.current.focus();
 	}, [todoContext, current])
 
 	const [todo, setTodo] = useState({
@@ -39,7 +42,7 @@ const TodoForm = () => {
 		[e.target.name]: e.target.value
 	})
 
-	const onCheck = e => setTodo({
+	const onCheck = () => setTodo({
 		...todo,
 		done: !todo.done
 	})
@@ -47,7 +50,6 @@ const TodoForm = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		// todo date 예외처리
 		if(title === '') {
 			setAlert('제목은 필수값 입니다.', 'danger')
 		} else if(title.length > 20) {
@@ -66,13 +68,29 @@ const TodoForm = () => {
 		clearCurrent();
 	}
 
+	const getNow = () => {
+		// return the today in YYYY-MM-DD format
+		let date = new Date(),
+			year = date.getFullYear(),
+			month = '' + (date.getMonth() + 1),
+			day = '' + date.getDate();
+
+		if(month.length < 2) {
+			month = '0' + month;
+		}
+		if(day.length < 2) {
+			day = '0' + day;
+		}
+		return [year, month, day].join('-');
+	}
+
 	return (
 		<div>
 			<form onSubmit={onSubmit}>
 
 				<h2 className="text-primary">{current ? '할 일 수정' : '할 일 추가'}</h2>
 
-				<input type="text" placeholder="제목(20자 이내)" name="title" value={title} onChange={onChange}/>
+				<input type="text" placeholder="제목(20자 이내)" name="title" value={title} onChange={onChange} ref={titleEl}/>
 
 				<TextareaAutosize
 					className="description-form"
@@ -85,7 +103,7 @@ const TodoForm = () => {
 
 				<div>
 					<span className="label">마감 기한</span>
-					<input type="date" name="deadline" value={deadline} onChange={onChange}/>
+					<input id="deadline" type="date" name="deadline" value={deadline} onChange={onChange} min={getNow()}/>
 				</div>
 
 				<div>
