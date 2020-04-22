@@ -6,7 +6,7 @@ const TodoItem = ({ todo }) => {
 	const todoContext = useContext(TodoContext);
 	const { deleteTodo, setCurrent, clearCurrent } = todoContext;
 
-	const { id, title, description, deadline, priority, done } = todo;
+	const { _id, title, description, deadline, priority, done } = todo;
 
 	const onDelete = () => {
 		deleteTodo(id);

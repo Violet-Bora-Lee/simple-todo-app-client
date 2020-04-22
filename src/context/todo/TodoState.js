@@ -94,11 +94,31 @@ const TodoState = props => {
 	}
 
 	// 할 일 수정
-	const updateTodo = todo => {
-		dispatch({
-			type: UPDATE_TODO,
-			payload: todo
-		})
+	const updateTodo = async todo => {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+
+		try {
+			const res = await axios.put(
+				`/api/todos/${todo._id}`,
+				todo,
+				config
+			);
+
+			dispatch({
+				type: UPDATE_TODO,
+				payload: res.data
+			})
+
+		} catch (err) {
+			dispatch({
+				type: TODO_ERROR,
+				payload: err.response.msg,
+			})
+		}
 	}
 
 	// 할 일 재정렬 (필터 적용)

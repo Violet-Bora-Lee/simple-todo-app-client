@@ -27,7 +27,7 @@ export default (state, action) => {
 		case UPDATE_TODO:
 			return {
 				...state,
-				todos: state.todos.map(todo => todo.id === action.payload.id ? action.payload: todo),
+				todos: state.todos.map(todo => todo._id === action.payload._id ? action.payload: todo),
 				loading: false
 			}
 		case DELETE_TODO:
