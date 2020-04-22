@@ -9,7 +9,7 @@ const TodoItem = ({ todo }) => {
 	const { _id, title, description, deadline, priority, done } = todo;
 
 	const onDelete = () => {
-		deleteTodo(id);
+		deleteTodo(_id);
 		clearCurrent();
 	}
 

@@ -65,11 +65,22 @@ const TodoState = props => {
 	}
 
 	// 할 일 삭제
-	const deleteTodo = id => {
-		dispatch({
-			type: DELETE_TODO,
-			payload: id
-		})
+	const deleteTodo = async _id => {
+
+		try {
+		  await axios.delete(`/api/todos/${_id}`);
+
+			dispatch({
+				type: DELETE_TODO,
+				payload: _id
+			});
+		} catch (err) {
+			dispatch({
+				type: TODO_ERROR,
+				payload: err.response.msg
+			})
+		}
+
 	}
 
 	const clearTodos = () => {
