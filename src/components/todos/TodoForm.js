@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import AlertContext from '../../context/alert/alertContext';
 import TodoContext from '../../context/todo/todoContext';
 import TextareaAutosize from 'react-textarea-autosize';
+import getNow from '../../utils/getNow';
 
 const TodoForm = () => {
 	const todoContext = useContext(TodoContext);
@@ -66,22 +67,6 @@ const TodoForm = () => {
 
 	const clearAll = () => {
 		clearCurrent();
-	}
-
-	const getNow = () => {
-		// return the today in YYYY-MM-DD format
-		let date = new Date(),
-			year = date.getFullYear(),
-			month = '' + (date.getMonth() + 1),
-			day = '' + date.getDate();
-
-		if(month.length < 2) {
-			month = '0' + month;
-		}
-		if(day.length < 2) {
-			day = '0' + day;
-		}
-		return [year, month, day].join('-');
 	}
 
 	return (

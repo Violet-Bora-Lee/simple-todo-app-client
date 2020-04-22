@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import TodoContext from '../../context/todo/todoContext';
+import getNow from '../../utils/getNow';
 
 const TodoItem = ({ todo }) => {
 	const todoContext = useContext(TodoContext);
@@ -39,28 +40,8 @@ const TodoItem = ({ todo }) => {
 	}
 
 	const isOverDeadline = () => {
-
-		const getNow = () => {
-			// return the today in YYYY-MM-DD format
-			let date = new Date(),
-					year = date.getFullYear(),
-					month = '' + (date.getMonth() + 1),
-					day = '' + date.getDate();
-
-			if(month.length < 2) {
-				month = '0' + month;
-			}
-			if(day.length < 2) {
-				day = '0' + day;
-			}
-			return [year, month, day].join('-');
-		}
-
 		return  getNow() > deadline;
-
 	}
-
-
 
 	return (
 		<div className='card bg-light'>
