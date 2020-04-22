@@ -39,15 +39,32 @@ const TodoItem = ({ todo }) => {
 	}
 
 	const isOverDeadline = () => {
-		// 데드라인 지나면 true반환
-		return false;
+
+		const getNow = () => {
+			// return the today in YYYY-MM-DD format
+			let date = new Date(),
+					year = date.getFullYear(),
+					month = '' + (date.getMonth() + 1),
+					day = '' + date.getDate();
+
+			if(month.length < 2) {
+				month = '0' + month;
+			}
+			if(day.length < 2) {
+				day = '0' + day;
+			}
+			return [year, month, day].join('-');
+		}
+
+		return  getNow() > deadline;
+
 	}
 
 
 
 	return (
 		<div className='card bg-light'>
-			<h3 className={'text-primary text-left ' + `${done && 'is-done'}`}>
+			<h3 className={'text-primary text-left ' + `${done && 'line-through'}`}>
 				{title}{' '}
 				<span
 					style={{float: 'right'}}
@@ -55,7 +72,7 @@ const TodoItem = ({ todo }) => {
 					{getPriorityString(priority)}
 				</span>
 			</h3>
-			<span className={'description ' + `${done && 'is-done'}`}>
+			<span className={'description ' + `${done && 'line-through'}`}>
 				{description}
 			</span>
 			<p>
@@ -63,7 +80,7 @@ const TodoItem = ({ todo }) => {
 				<button className='btn btn-danger btn-sm' onClick={onDelete}>삭제</button>
 				<button
 					style={{float: 'right'}}
-					className={'deadline badge-white ' + (isOverDeadline() && 'deadline-over')}>
+					className={'deadline badge-white ' + (isOverDeadline() && 'line-through')}>
 				마감기한: {deadline ? deadline : '없음'}</button>
 			</p>
 

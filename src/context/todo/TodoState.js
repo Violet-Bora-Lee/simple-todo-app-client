@@ -36,7 +36,7 @@ const TodoState = props => {
 		} catch (err) {
 		  dispatch({
 				type: TODO_ERROR,
-				payload: err.response.message,
+				payload: err.response.msg,
 			})
 		}
 	}

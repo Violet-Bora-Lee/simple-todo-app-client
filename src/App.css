@@ -195,8 +195,7 @@ img {
 	padding: 0.3rem 1rem;
 }
 
-.deadline-over,
-.is-done {
+.line-through {
 	text-decoration: line-through !important;
 }
 
