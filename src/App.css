@@ -195,8 +195,9 @@ img {
 	padding: 0.3rem 1rem;
 }
 
-.deadline-over {
-	text-decoration: line-through
+.deadline-over,
+.is-done {
+	text-decoration: line-through !important;
 }
 
 .btn {

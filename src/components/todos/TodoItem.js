@@ -47,7 +47,7 @@ const TodoItem = ({ todo }) => {
 
 	return (
 		<div className='card bg-light'>
-			<h3 className='text-primary text-left'>
+			<h3 className={'text-primary text-left ' + `${done && 'is-done'}`}>
 				{title}{' '}
 				<span
 					style={{float: 'right'}}
@@ -55,7 +55,7 @@ const TodoItem = ({ todo }) => {
 					{getPriorityString(priority)}
 				</span>
 			</h3>
-			<span className='description'>
+			<span className={'description ' + `${done && 'is-done'}`}>
 				{description}
 			</span>
 			<p>
