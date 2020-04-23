@@ -10,10 +10,7 @@ import {
 	CLEAR_CURRENT,
 	UPDATE_TODO,
 	CLEAR_TODOS,
-	FILTER_TODOS,
-	CLEAR_FILTER,
 	TODO_ERROR,
-	SET_ALERT,
 	CLEAR_ERRORS
 } from "../types";
 import getNow from "../../utils/getNow";

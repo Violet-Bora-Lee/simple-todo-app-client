@@ -33,7 +33,8 @@ const TodoForm = () => {
 			setAlert(error, 'danger');
 			clearErrors();
 		}
-	}, [current])
+		// eslint-disable-next-line
+	}, [current]);
 
 	const [todo, setTodo] = useState({
 		title: '',

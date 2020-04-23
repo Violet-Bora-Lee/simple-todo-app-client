@@ -10,7 +10,8 @@ const Todos = () => {
 
 	useEffect(() => {
 		getTodos();
-	}, [])
+		// eslint-disable-next-line
+	}, []);
 
 	if (todos !== null && todos.length === 0 && !loading) {
 		return <h4>해야할 일이 없습니다.</h4>

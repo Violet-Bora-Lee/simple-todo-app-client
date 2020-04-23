@@ -45,15 +45,15 @@ const TodoItem = ({ todo }) => {
 
 	return (
 		<div className='card bg-light'>
-			<h3 className={'text-primary text-left ' + `${done && 'line-through'}`}>
+			<h3 className={`text-primary text-left ${done && 'line-through'}`}>
 				{title}{' '}
 				<span
 					style={{float: 'right'}}
-				  className={'badge ' + `${getPriorityBadgeClass(priority)}`}>
+				  className={`badge ${getPriorityBadgeClass(priority)}`}>
 					{getPriorityString(priority)}
 				</span>
 			</h3>
-			<span className={'description ' + `${done && 'line-through'}`}>
+			<span className={`description ${done && 'line-through'}`}>
 				{description}
 			</span>
 			<p>
