@@ -35,5 +35,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:6000"
+  "proxy": "https://secure-reaches-65492.herokuapp.com"
 }
