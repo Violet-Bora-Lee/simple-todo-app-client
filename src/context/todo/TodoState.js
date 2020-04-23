@@ -96,7 +96,7 @@ const TodoState = props => {
 			payload: todo,
 		})
 
-		if( todo.deadline < getNow() ){
+		if( todo.deadline !== '' && todo.deadline < getNow() ){
 			dispatch({
 				type: TODO_ERROR,
 				payload: "마감기한이 지났습니다."
