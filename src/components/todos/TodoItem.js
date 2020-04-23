@@ -40,7 +40,7 @@ const TodoItem = ({ todo }) => {
 	}
 
 	const isOverDeadline = () => {
-		return  getNow() > deadline;
+		return deadline === '' ? false : (getNow() > deadline);
 	}
 
 	return (
