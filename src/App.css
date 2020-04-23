@@ -185,6 +185,7 @@ img {
 
 /*description*/
 .description {
+	white-space: pre-wrap;
 	display: block;
 	margin: 0.5rem 1rem 1rem 0.5rem;
 }
