@@ -8,7 +8,7 @@ const TodoForm = () => {
 	const todoContext = useContext(TodoContext);
 	const alertContext = useContext(AlertContext);
 
-	const { addTodo, updateTodo, clearCurrent, current } = todoContext;
+	const { addTodo, updateTodo, clearCurrent, current, error, clearErrors } = todoContext;
 	const { setAlert } = alertContext;
 
 	const titleEl = useRef(null);
@@ -27,6 +27,13 @@ const TodoForm = () => {
 		}
 		titleEl.current.focus();
 	}, [todoContext, current])
+
+	useEffect(() => {
+		if( error ) {
+			setAlert(error, 'danger');
+			clearErrors();
+		}
+	}, [current])
 
 	const [todo, setTodo] = useState({
 		title: '',

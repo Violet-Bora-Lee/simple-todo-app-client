@@ -12,8 +12,11 @@ import {
 	CLEAR_TODOS,
 	FILTER_TODOS,
 	CLEAR_FILTER,
-	TODO_ERROR
+	TODO_ERROR,
+	SET_ALERT,
+	CLEAR_ERRORS
 } from "../types";
+import getNow from "../../utils/getNow";
 
 const TodoState = props => {
 	const initialState = {
@@ -95,6 +98,13 @@ const TodoState = props => {
 			type: SET_CURRENT,
 			payload: todo,
 		})
+
+		if( todo.deadline < getNow() ){
+			dispatch({
+				type: TODO_ERROR,
+				payload: "마감기한이 지났습니다."
+			})
+		}
 	}
 
 	// 선택 된 할 일 삭제
@@ -136,6 +146,10 @@ const TodoState = props => {
 
 	// 필터 해제
 
+	const clearErrors = () => {
+		dispatch({ type: CLEAR_ERRORS })
+	}
+
 	return (
 		<TodoContext.Provider
 		  value={{
@@ -148,7 +162,8 @@ const TodoState = props => {
 				clearTodos,
 				setCurrent,
 				clearCurrent,
-				updateTodo
+				updateTodo,
+				clearErrors
 			}}
 		>
 			{ props.children }
