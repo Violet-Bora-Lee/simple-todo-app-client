@@ -28,7 +28,7 @@ https://secure-reaches-65492.herokuapp.com/
 ## 개발 환경 구축
 
 - [서버 저장소](https://github.com/Violet-Bora-Lee/simple-todo-app-server.git)를 클론 받은 후, 해당 디렉터리(루트 디렉터리)에서 `git submodule init`, `git submodule update` 명령어를 연속으로 입력해 클라이언트 소스코드가 담긴 본 [저장소](https://github.com/Violet-Bora-Lee/simple-todo-app-client.git)(서브모듈)를 클론받는다.
-  -  위 과정을 생략하려면 본 저장소를 클론 받을 때 `git clone --recurse-submodules https://github.com/Violet-Bora-Lee/simple-todo-app-server.git`를 입력하면 된다.
+  -  위 과정을 생략하려면 본 저장소를 클론 받을 때 `git clone --recurse-submodules https://github.com/Violet-Bora-Lee/simple-todo-app-server.git client`를 입력하면 된다.
 - 루트 디렉터리에 `.env` 파일을 만들고, 필요한 환경 변수(예: MongoDB URI)를 입력한다.
 - 루트 디렉터리와 client 디렉터리에서 각각 `npm install` 명령어를 입력해 필요한 패키지를 설치한다. 
 - 루트 디렉터리에서 `npm run dev`을 입력해 서버와 클라이언트를 동시에 구동한다.
